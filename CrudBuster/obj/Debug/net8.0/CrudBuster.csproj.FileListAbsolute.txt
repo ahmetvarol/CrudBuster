@@ -1,0 +1,12 @@
+/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/bin/Debug/net8.0/CrudBuster.deps.json
+/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/bin/Debug/net8.0/CrudBuster.dll
+/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/bin/Debug/net8.0/CrudBuster.pdb
+/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/obj/Debug/net8.0/CrudBuster.csproj.AssemblyReference.cache
+/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/obj/Debug/net8.0/CrudBuster.GeneratedMSBuildEditorConfig.editorconfig
+/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/obj/Debug/net8.0/CrudBuster.AssemblyInfoInputs.cache
+/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/obj/Debug/net8.0/CrudBuster.AssemblyInfo.cs
+/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/obj/Debug/net8.0/CrudBuster.csproj.CoreCompileInputs.cache
+/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/obj/Debug/net8.0/CrudBuster.dll
+/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/obj/Debug/net8.0/refint/CrudBuster.dll
+/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/obj/Debug/net8.0/CrudBuster.pdb
+/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/obj/Debug/net8.0/ref/CrudBuster.dll
