@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>CrudBuster</id>
+    <version>1.0.0-beta1</version>
+    <authors>Ahmet Can VAROL</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <readme>README.md</readme>
+    <description>Automatic CRUD endpoint generator for ASP.NET Core minimal APIs</description>
+    <releaseNotes>Beta release with basic CRUD endpoint generation for ASP.NET Core minimal APIs.</releaseNotes>
+    <tags>crud aspnetcore minimalapi beta</tags>
+    <repository type="git" url="https://github.com/ahmetvarol/CrudBuster" commit="cd6ef69d5a278d0cbbb0180ab4651ec21083e1cd" />
+    <dependencies>
+      <group targetFramework="net8.0">
+        <dependency id="Microsoft.Extensions.DependencyInjection" version="8.0.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net8.0">
+        <frameworkReference name="Microsoft.AspNetCore.App" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/bin/Release/net8.0/CrudBuster.dll" target="lib/net8.0/CrudBuster.dll" />
+    <file src="/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/bin/Release/net8.0/CrudBuster.xml" target="lib/net8.0/CrudBuster.xml" />
+    <file src="/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/README.md" target="/README.md" />
+  </files>
+</package>
