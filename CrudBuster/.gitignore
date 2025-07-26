@@ -1,0 +1,7 @@
+# Derleme çıktıları
+bin/
+obj/
+*.dll
+*.pdb
+*.nupkg
+project.assets.json
