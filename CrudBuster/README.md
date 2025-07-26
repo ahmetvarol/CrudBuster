@@ -37,6 +37,18 @@ public interface IRepository
     Task DeleteAsync();
 }
 
+public async Task<Result<List<TListViewModel>>> GetListAsync()
+{
+    var response = new Result<List<TListViewModel>>();
+    var data = await _repository.GetAllAsync(x=>x.Status == Status.Active);
+
+    if (data is not null)
+        response.Data = _mapper.Map<List<TListViewModel>>(data);
+    else
+        response.Message = "Something went wrong";
+
+    return response;
+}
 ... 
     
     public class Result<T>

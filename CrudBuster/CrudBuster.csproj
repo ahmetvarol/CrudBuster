@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PackageId>CrudBuster</PackageId>
-        <Version>1.0.0-beta1</Version>
+        <Version>1.0.2-beta1</Version>
         <Authors>Ahmet Can VAROL</Authors>
         <Description>Automatic CRUD endpoint generator for ASP.NET Core minimal APIs</Description>
         <PackageTags>crud;aspnetcore;minimalapi;beta;minimalapigenerator;no_More_Crud;crudBuster;automated;code-generation;rest;webapi;dotnet;crud;minimal_api;api;.net;database;</PackageTags>
