@@ -9,8 +9,8 @@
     <readme>README.md</readme>
     <description>Automatic CRUD endpoint generator for ASP.NET Core minimal APIs</description>
     <releaseNotes>Beta release with basic CRUD endpoint generation for ASP.NET Core minimal APIs.</releaseNotes>
-    <tags>crud aspnetcore minimalapi beta</tags>
-    <repository type="git" url="https://github.com/ahmetvarol/CrudBuster" commit="cd6ef69d5a278d0cbbb0180ab4651ec21083e1cd" />
+    <tags>crud aspnetcore minimalapi beta minimalapigenerator no_More_Crud crudBuster automated code-generation rest webapi dotnet minimal_api api .net database</tags>
+    <repository type="git" url="https://github.com/ahmetvarol/CrudBuster" commit="4b5e075a613290f579c13031746a75c7e5d847ce" />
     <dependencies>
       <group targetFramework="net8.0">
         <dependency id="Microsoft.Extensions.DependencyInjection" version="8.0.1" exclude="Build,Analyzers" />

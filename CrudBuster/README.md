@@ -8,7 +8,7 @@ Automatic CRUD Endpoint Generator for ASP.NET Core Minimal APIs (Beta)
 - **Flexible Service Integration: Works with any service class thanks to its delegate-based structure.
 - **Authorization Support: You can add custom authorization policies to your endpoints.
 - **Minimal API Support**: Optimized for .NET 6 and later.
-- **Beta Release**: Currently in beta — we welcome your feedback! At this stage, it only supports generating listing (GET) endpoints. Support for other CRUD operations will be added in future releases.
+- **Beta Release**: Currently in beta — we welcome your feedback!
 
 ## Installation
 Add the NuGet package to your project:
