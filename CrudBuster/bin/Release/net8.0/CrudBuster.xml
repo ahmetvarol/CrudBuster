@@ -9,12 +9,7 @@
             Configuration for CRUD operation
             </summary>
         </member>
-        <member name="P:CrudBuster.CrudOptions.DomainLayerName">
-            <summary>
-            Your project in domain layer name.
-            If you enter the name of the domain layer here, it will retrieve the classes marked with BaseEntity or anything within that layer and generate minimal APIs specifically for CRUD operations related to those domain entities.
-            </summary>
-        </member>
+        <!-- Badly formed XML comment ignored for member "P:CrudBuster.CrudOptions.DomainLayerName" -->
         <member name="P:CrudBuster.CrudOptions.ViewModelsLayerName">
             <summary>
             The layer where the view models are located
@@ -77,6 +72,5 @@
             It is used to get the classes that inherit from this class.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:CrudBuster.CrudOptions.ApiResulClassName" -->
     </members>
 </doc>
