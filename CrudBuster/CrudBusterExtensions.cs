@@ -59,7 +59,7 @@ public static class CrudBusterExtensions
                     var dto = await ctx.Request.ReadFromJsonAsync(createViewModel);
                     var task = (Task)method.Invoke(service, new object[] { dto });
                     await task.ConfigureAwait(false);
-                    return task.GetType().GetProperty(options.ApiResulPropertyName)?.GetValue(task);
+                    return task.GetType().GetProperty(options.ApiResulClassName)?.GetValue(task);
                 })
                 .Accepts(createViewModel, "application/json")
                 .WithTags(routePrefix);
@@ -71,7 +71,7 @@ public static class CrudBusterExtensions
                     var dto = await ctx.Request.ReadFromJsonAsync(updateViewModel);
                     var task = (Task)method.Invoke(service, new object[] { dto });
                     await task.ConfigureAwait(false);
-                    return task.GetType().GetProperty(options.ApiResulPropertyName)?.GetValue(task);
+                    return task.GetType().GetProperty(options.ApiResulClassName)?.GetValue(task);
                 })
                 .Accepts(updateViewModel, "application/json")
                 .WithTags(routePrefix);
@@ -94,7 +94,7 @@ public static class CrudBusterExtensions
                     var method = baseServiceType.GetMethod(options.GetListService);
                     var task = (Task)method.Invoke(service, null);
                     await task.ConfigureAwait(false);
-                    return task.GetType().GetProperty(options.ApiResulPropertyName)?.GetValue(task);
+                    return task.GetType().GetProperty(options.ApiResulClassName)?.GetValue(task);
                 })
                 .WithTags(routePrefix);
 
@@ -104,7 +104,7 @@ public static class CrudBusterExtensions
                     var method = baseServiceType.GetMethod(options.GetByIdService);
                     var task = (Task)method.Invoke(service, new object[] { Id });
                     await task.ConfigureAwait(false);
-                    return task.GetType().GetProperty(options.ApiResulPropertyName)?.GetValue(task);
+                    return task.GetType().GetProperty(options.ApiResulClassName)?.GetValue(task);
                 })
                 .WithTags(routePrefix);
             

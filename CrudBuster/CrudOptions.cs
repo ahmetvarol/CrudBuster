@@ -83,5 +83,5 @@ namespace CrudBuster;
         ///     public T Data { get; set; }
         /// }
         /// </summary>
-        public string ApiResulPropertyName { get; set; }
+        public string ApiResulClassName { get; set; }
     }
