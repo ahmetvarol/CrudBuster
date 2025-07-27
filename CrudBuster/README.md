@@ -4,9 +4,9 @@ Automatic CRUD Endpoint Generator for ASP.NET Core Minimal APIs (Beta)
 **CrudBuster**, allows you to quickly and flexibly generate CRUD (Create, Read, Update, Delete) endpoints in your ASP.NET Core applications. You can define your endpoints without relying on any interface by integrating your own service classes through delegates.
 
 ## Features
-- **Automatic CRUD Endpoint Generation: Create GET, POST, PUT, and DELETE endpoints with a single method.
-- **Flexible Service Integration: Works with any service class thanks to its delegate-based structure.
-- **Authorization Support: You can add custom authorization policies to your endpoints.
+- **Automatic CRUD Endpoint Generation**: Create GET, POST, PUT, and DELETE endpoints with a single method.
+- **Flexible Service Integration**: Works with any service class thanks to its delegate-based structure.
+- **Authorization Support**: You can add custom authorization policies to your endpoints.
 - **Minimal API Support**: Optimized for .NET 6 and later.
 - **Beta Release**: Currently in beta — we welcome your feedback!
 
@@ -91,6 +91,14 @@ public async Task<Result<List<TListViewModel>>> GetListAsync()
     options.BaseEntityName="IEntity"; // !!!The database tables must have the same name as the base entity class they inherit from.
 });
 ```
+
+## Donate
+Binance
+- **BTC**: 13mzeg11nGAHwx5WtHye5dpNTQxbsb1T2v
+
+- **ETH**: 0xadcdb8c83207821f86e9ff683cc74fa45e48ca30
+
+- **SOL**: EdQCWcWmvsEJq9PxnVegviJipcExZUUgEz2ZZTBbhQVa
 
 ```bash
 dotnet add package CrudBuster --version 1.0.0-beta1 --prerelease
