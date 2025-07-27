@@ -74,7 +74,8 @@ public async Task<Result<List<TListViewModel>>> GetListAsync()
     //In this field, you must assign the last part of the name you used in your view model classes. For example: ProductCreateViewModel, ProductCreateVM, ProductCreateDTO, or whatever naming convention you follow.
     options.ViewModelPattern = "ViewModel or DTO or VM etc...";
     
-    options.AuthorizationPolicy = "Admin or NULL"; 
+    //This field specifies which permissions can access the controller. You can set it to null
+    options.AuthorizationPolicy = "Admin, SuperAdmin"; 
     
     options.RepositoryName = "IRepository"; //!!! It has to be the same as the name of the repository.".
     
@@ -85,8 +86,7 @@ public async Task<Result<List<TListViewModel>>> GetListAsync()
     options.UpdateService = "UpdateAsync";   //!!! It must be the same as the method name in the repository.
     
     //Where will the obtained data be assigned? You should provide the name of the base response field in this area.
-    options.ApiResulPropertyName = "Result";
-    
+    options.ApiResulClassName = "Result";
     
     options.BaseEntityName="IEntity"; // !!!The database tables must have the same name as the base entity class they inherit from.
 });

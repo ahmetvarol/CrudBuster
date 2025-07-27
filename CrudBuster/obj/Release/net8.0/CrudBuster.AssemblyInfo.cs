@@ -13,11 +13,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Ahmet Can VAROL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Automatic CRUD endpoint generator for ASP.NET Core minimal APIs")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.2.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.2-beta1+a0945b4f29f3d4288241194f8bf78711064b9ce0")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.3.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.3-beta1+ae3148f9ccc19ba8a19848f71e9d3c1e28227540")]
 [assembly: System.Reflection.AssemblyProductAttribute("CrudBuster")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CrudBuster")]
-[assembly: System.Reflection.AssemblyVersionAttribute("1.0.2.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("1.0.3.0")]
 [assembly: System.Reflection.AssemblyMetadataAttribute("RepositoryUrl", "https://github.com/ahmetvarol/CrudBuster")]
 
 // MSBuild WriteCodeFragment sınıfı tarafından oluşturuldu.

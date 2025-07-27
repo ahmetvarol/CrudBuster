@@ -74,6 +74,7 @@ namespace CrudBuster;
         
         
         /// <summary>
+        /// It is the name of the common Result<T> class used for all responses.
         /// View model name of common API base response model
         /// Ex:
         /// public class Result(Class name doesn't matter) -> This
