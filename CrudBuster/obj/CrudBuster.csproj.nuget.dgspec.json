@@ -5,7 +5,7 @@
   },
   "projects": {
     "/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/CrudBuster.csproj": {
-      "version": "1.0.3-beta1",
+      "version": "1.0.5-beta1",
       "restore": {
         "projectUniqueName": "/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/CrudBuster.csproj",
         "projectName": "CrudBuster",

@@ -4,89 +4,72 @@
         <name>CrudBuster</name>
     </assembly>
     <members>
-        <member name="T:CrudBuster.CrudBusterExtensions.CrudOptions">
+        <member name="T:CrudBuster.CrudOptions">
             <summary>
             Configuration for CRUD operation
             </summary>
         </member>
-        <member name="P:CrudBuster.CrudBusterExtensions.CrudOptions.DomainLayerName">
-            <summary>
-            Your project in domain layer name.
-            If you enter the name of the domain layer here, it will retrieve the classes marked with BaseEntity or anything within that layer and generate minimal APIs specifically for CRUD operations related to those domain entities.
-            </summary>
-        </member>
-        <member name="P:CrudBuster.CrudBusterExtensions.CrudOptions.ViewModelsLayerName">
+        <!-- Badly formed XML comment ignored for member "P:CrudBuster.CrudOptions.DomainLayerName" -->
+        <member name="P:CrudBuster.CrudOptions.ViewModelsLayerName">
             <summary>
             The layer where the view models are located
             </summary>
         </member>
-        <member name="P:CrudBuster.CrudBusterExtensions.CrudOptions.RepositoryLayerName">
+        <member name="P:CrudBuster.CrudOptions.RepositoryLayerName">
             <summary>
             The layer where the repository are located
             </summary>
         </member>
-        <member name="P:CrudBuster.CrudBusterExtensions.CrudOptions.RepositoryName">
+        <member name="P:CrudBuster.CrudOptions.RepositoryName">
             <summary>
             Your repository name
             Ex: IRepository, IRepositoryService, IGenericService, etc...
             </summary>
         </member>
-        <member name="P:CrudBuster.CrudBusterExtensions.CrudOptions.IsAuthenticateRequired">
+        <member name="P:CrudBuster.CrudOptions.IsAuthenticateRequired">
             <summary>
             Is authorization mandatory on a controller?
             </summary>
         </member>
-        <member name="P:CrudBuster.CrudBusterExtensions.CrudOptions.ViewModelPattern">
+        <member name="P:CrudBuster.CrudOptions.ViewModelPattern">
             <summary>
             Your view model of entity name pattern
             Ex: Product*ViewModel*, Product*VM*, Product*DTO* etc...
             </summary>
         </member>
-        <member name="P:CrudBuster.CrudBusterExtensions.CrudOptions.AuthorizationPolicy">
+        <member name="P:CrudBuster.CrudOptions.AuthorizationPolicy">
             <summary>
             Admin, User, SuperAdmin etc...
             </summary>
         </member>
-        <member name="P:CrudBuster.CrudBusterExtensions.CrudOptions.BaseEntityName">
+        <member name="P:CrudBuster.CrudOptions.BaseEntityName">
             <summary>
             Your base entity name. It's used to retrieve the classes that inherit from this class.
             </summary>
         </member>
-        <member name="P:CrudBuster.CrudBusterExtensions.CrudOptions.GetListService">
+        <member name="P:CrudBuster.CrudOptions.GetListService">
             <summary>
             It is used to get the classes that inherit from this class.
             </summary>
         </member>
-        <member name="P:CrudBuster.CrudBusterExtensions.CrudOptions.GetByIdService">
+        <member name="P:CrudBuster.CrudOptions.GetByIdService">
             <summary>
             It is used to get the classes that inherit from this class.
             </summary>
         </member>
-        <member name="P:CrudBuster.CrudBusterExtensions.CrudOptions.CreateService">
+        <member name="P:CrudBuster.CrudOptions.CreateService">
             <summary>
             It is used to get the classes that inherit from this class.
             </summary>
         </member>
-        <member name="P:CrudBuster.CrudBusterExtensions.CrudOptions.UpdateService">
+        <member name="P:CrudBuster.CrudOptions.UpdateService">
             <summary>
             It is used to get the classes that inherit from this class.
             </summary>
         </member>
-        <member name="P:CrudBuster.CrudBusterExtensions.CrudOptions.DeleteService">
+        <member name="P:CrudBuster.CrudOptions.DeleteService">
             <summary>
             It is used to get the classes that inherit from this class.
-            </summary>
-        </member>
-        <member name="P:CrudBuster.CrudBusterExtensions.CrudOptions.ApiResulPropertyName">
-            <summary>
-            View model name of common API base response model
-            Ex:
-            public class Result(Class name doesn't matter) -> This
-            {
-                public bool Status { get; set; }
-                public string Message { get; set; }
-                public T Data { get; set; }
-            }
             </summary>
         </member>
     </members>

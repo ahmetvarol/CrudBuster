@@ -20,18 +20,18 @@ Thank you for testing our beta version! You can share your issues or suggestions
 ## Usage
 ```csharp
 //ViewModels()
-public record ProductCreateViewModel(Guid Id, string Name);
-public record ProductUpdateViewModel(Guid Id, string Name);
-public record ProductDeleteViewModel(Guid Id, string Name);
-public record ProductGetViewModel(Guid Id, string Name);
-public record ProductListViewModel(Guid Id, string Name);
+public record ProductCreateVM(Guid Id, string Name);
+public record ProductUpdateVM(Guid Id, string Name);
+public record ProductDeleteVM(Guid Id, string Name);
+public record ProductGetVM(Guid Id, string Name);
+public record ProductListVM(Guid Id, string Name);
 
 ...
     
 public interface IRepository
 {
+    Task GetAsync();
     Task GetListAsync();
-    Task GetByIdAsync();
     Task CreateAsync();
     Task UpdateAsync();
     Task DeleteAsync();
@@ -50,7 +50,7 @@ public async Task<Result<List<TListViewModel>>> GetListAsync()
     return response;
 }
 ... 
-    
+    //Base response model
     public class Result<T>
     {
         public bool Status { get; set; }
@@ -59,38 +59,56 @@ public async Task<Result<List<TListViewModel>>> GetListAsync()
     }
     
 ...
+    
+app.CrudBuster(opt => opt
+    //!!! It must be the same as the method name in the repository.
+    .WithGetByIdService("GetAsync")
 
-     app.CrudBuster(options =>
-{
+    //!!! It must be the same as the method name in the repository.
+    .WithGetListService("GetListAsync")
+
+    //!!! It must be the same as the method name in the repository.
+    .WithCreateService("CreateAsync")
+
+    //!!! It must be the same as the method name in the repository.
+    .WithUpdateService("UpdateAsync")
+
+    //!!! It must be the same as the method name in the repository.
+    .WithDeleteService("DeleteAsync")
+    
     //It searches for entities in this layer.
-    options.DomainLayerName = "Domain";
+    .WithDomainLayer("DOmain")
     
     //It searches for view models in this layer.
-    options.ViewModelsLayerName = "Application";
+    .WithViewModelLayer("Application")
     
     //It searches for repo in this layer.
-    options.RepositoryLayerName = "Infrastructure";
-
-    //In this field, you must assign the last part of the name you used in your view model classes. For example: ProductCreateViewModel, ProductCreateVM, ProductCreateDTO, or whatever naming convention you follow.
-    options.ViewModelPattern = "ViewModel or DTO or VM etc...";
+    .WithRepositoryLayer("Infrastructure")
     
-    //This field specifies which permissions can access the controller. You can set it to null
-    options.AuthorizationPolicy = "Admin, SuperAdmin"; 
+    //In this field, you must assign the last part of the name you used in your view model classes. For example: ProductCreate*ViewModel*, ProductCreate*VM*, ProductCreate*DTO*, or whatever naming convention you follow.
+    .WithViewModelPattern("VM")
     
-    options.RepositoryName = "IRepository"; //!!! It has to be the same as the name of the repository.".
-    
-    options.GetListService = "GetListAsync"; //!!! It must be the same as the method name in the repository.
-    options.GetByIdService = "GetByIdAsync"; //!!! It must be the same as the method name in the repository.
-    options.DeleteService = "DeleteAsync";   //!!! It must be the same as the method name in the repository.
-    options.CreateService = "CreateAsync";   //!!! It must be the same as the method name in the repository.
-    options.UpdateService = "UpdateAsync";   //!!! It must be the same as the method name in the repository.
+    // !!!The database tables must have the same name as the base entity class they inherit from.
+    .WithBaseEntityName("IBaseEntity")
     
     //Where will the obtained data be assigned? You should provide the name of the base response field in this area.
-    options.ApiResulClassName = "Result";
+    .WithApiResulClassName("ApiResult") 
     
-    options.BaseEntityName="IEntity"; // !!!The database tables must have the same name as the base entity class they inherit from.
-});
+    //If required authenticate
+    .WithIsAuthenticateRequired(false)
+
+     //This field specifies which permissions can access the controller. You can set it to null
+    .WithAuthorizationPolicy("Admin, User, SuperAdmin")
+
+    //!!! It has to be the same as the name of the repository.".
+    .WithRepositoryName("IRepository"));
+
 ```
+
+```bash
+  dotnet add package CrudBuster --version 1.0.6-beta1 --prerelease
+```
+
 
 ## Donate
 Binance
@@ -99,6 +117,3 @@ Binance
 - **ETH**: 0xadcdb8c83207821f86e9ff683cc74fa45e48ca30
 
 - **SOL**: EdQCWcWmvsEJq9PxnVegviJipcExZUUgEz2ZZTBbhQVa
-
-```bash
-dotnet add package CrudBuster --version 1.0.0-beta1 --prerelease

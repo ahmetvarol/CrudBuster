@@ -1,11 +1,25 @@
 namespace CrudBuster;
 
-  /// <summary>
+    /// <summary>
     /// Configuration for CRUD operation
     /// </summary>
     public class CrudOptions
     {
-        /// <summary>
+        public CrudOptions WithDomainLayer(string name) { DomainLayerName = name; return this; }
+        public CrudOptions WithViewModelLayer(string name) { ViewModelsLayerName = name; return this; }
+        public CrudOptions WithRepositoryLayer(string name) { RepositoryLayerName = name; return this; }
+        public CrudOptions WithRepositoryName(string name) { RepositoryName = name; return this; }
+        public CrudOptions WithIsAuthenticateRequired(bool status) { IsAuthenticateRequired = status; return this; }
+        public CrudOptions WithViewModelPattern(string name) { ViewModelPattern = name; return this; }
+        public CrudOptions WithAuthorizationPolicy(string name) { AuthorizationPolicy = name; return this; }
+        public CrudOptions WithBaseEntityName(string name) { BaseEntityName = name; return this; }
+        public CrudOptions WithGetListService(string name) { GetListService = name; return this; }
+        public CrudOptions WithGetByIdService(string name) { GetByIdService = name; return this; }
+        public CrudOptions WithCreateService(string name) { CreateService = name; return this; }
+        public CrudOptions WithUpdateService(string name) { UpdateService = name; return this; }
+        public CrudOptions WithDeleteService(string name) { DeleteService = name; return this; }
+        
+        
         /// Your project in domain layer name.
         /// If you enter the name of the domain layer here, it will retrieve the classes marked with BaseEntity or anything within that layer and generate minimal APIs specifically for CRUD operations related to those domain entities.
         /// </summary>
@@ -71,18 +85,6 @@ namespace CrudBuster;
         /// It is used to get the classes that inherit from this class.
         /// </summary>
         public string DeleteService { get; set; }
-        
-        
-        /// <summary>
-        /// It is the name of the common Result<T> class used for all responses.
-        /// View model name of common API base response model
-        /// Ex:
-        /// public class Result(Class name doesn't matter) -> This
-        /// {
-        ///     public bool Status { get; set; }
-        ///     public string Message { get; set; }
-        ///     public T Data { get; set; }
-        /// }
-        /// </summary>
-        public string ApiResulClassName { get; set; }
     }
+    
+    

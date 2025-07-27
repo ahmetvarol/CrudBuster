@@ -13,8 +13,8 @@ public static class CrudBusterExtensions
         Action<CrudOptions>? configure = null)
     {
         var options = new CrudOptions();
-        configure?.Invoke(options); 
-        
+        configure?.Invoke(options);
+
         var domainAssembly = Assembly.Load(options.DomainLayerName);
         var viewModelsAssembly = Assembly.Load(options.ViewModelsLayerName);
         var repositoryAssembly = Assembly.Load(options.RepositoryLayerName);
@@ -59,7 +59,7 @@ public static class CrudBusterExtensions
                     var dto = await ctx.Request.ReadFromJsonAsync(createViewModel);
                     var task = (Task)method.Invoke(service, new object[] { dto });
                     await task.ConfigureAwait(false);
-                    return task.GetType().GetProperty(options.ApiResulClassName)?.GetValue(task);
+                    return task.GetType().GetProperty("Result")?.GetValue(task);
                 })
                 .Accepts(createViewModel, "application/json")
                 .WithTags(routePrefix);
@@ -71,12 +71,12 @@ public static class CrudBusterExtensions
                     var dto = await ctx.Request.ReadFromJsonAsync(updateViewModel);
                     var task = (Task)method.Invoke(service, new object[] { dto });
                     await task.ConfigureAwait(false);
-                    return task.GetType().GetProperty(options.ApiResulClassName)?.GetValue(task);
+                    return task.GetType().GetProperty("Result")?.GetValue(task);
                 })
                 .Accepts(updateViewModel, "application/json")
                 .WithTags(routePrefix);
             
-            var deleteRoute = endpoints.MapDelete(routePrefix + "/DeleteAsync", async (Guid Id,HttpContext ctx) =>
+            var deleteRoute = endpoints.MapDelete(routePrefix + "/DeleteAsync", async (HttpContext ctx) =>
                 {
                     var service = ctx.RequestServices.GetRequiredService(baseServiceType);
                     var method = baseServiceType.GetMethod(options.DeleteService);
@@ -94,7 +94,7 @@ public static class CrudBusterExtensions
                     var method = baseServiceType.GetMethod(options.GetListService);
                     var task = (Task)method.Invoke(service, null);
                     await task.ConfigureAwait(false);
-                    return task.GetType().GetProperty(options.ApiResulClassName)?.GetValue(task);
+                    return task.GetType().GetProperty("Result")?.GetValue(task);
                 })
                 .WithTags(routePrefix);
 
@@ -104,18 +104,16 @@ public static class CrudBusterExtensions
                     var method = baseServiceType.GetMethod(options.GetByIdService);
                     var task = (Task)method.Invoke(service, new object[] { Id });
                     await task.ConfigureAwait(false);
-                    return task.GetType().GetProperty(options.ApiResulClassName)?.GetValue(task);
+                    return task.GetType().GetProperty("Result")?.GetValue(task);
                 })
                 .WithTags(routePrefix);
             
-            if (options.IsAuthenticateRequired)
-            {
-                getAllRoute.RequireAuthorization(options.AuthorizationPolicy);
-                getRoute.RequireAuthorization(options.AuthorizationPolicy);
-                createRoute.RequireAuthorization(options.AuthorizationPolicy);
-                updateRoute.RequireAuthorization(options.AuthorizationPolicy);
-                deleteRoute.RequireAuthorization(options.AuthorizationPolicy);
-            }
+            
+            getAllRoute.ApplyAuthorization(options);
+            getRoute.ApplyAuthorization(options);
+            createRoute.ApplyAuthorization(options);
+            updateRoute.ApplyAuthorization(options);
+            deleteRoute.ApplyAuthorization(options);
         }
         
         
