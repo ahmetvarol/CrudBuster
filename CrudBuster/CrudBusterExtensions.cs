@@ -34,15 +34,22 @@ public static class CrudBusterExtensions
 
         foreach (var entity in entities)
         {
-            
             var viewModels = viewModelsAssembly.GetExportedTypes().Where(t => t.IsClass && !t.IsAbstract && t.Name.StartsWith(entity.Name) && t.Name.EndsWith(options.ViewModelPattern)).ToList();
             
-            if (!viewModels.Any(x => x.Name == $"{entity.Name}Create{options.ViewModelPattern}"))
-                throw new Exception($"The view model for the create {entity.Name} was not found ");
-            if (!viewModels.Any(x => x.Name == $"{entity.Name}Update{options.ViewModelPattern}"))
-                throw new Exception($"The view model for the update {entity.Name} was not found ");
-            if (!viewModels.Any(x => x.Name == $"{entity.Name}Delete{options.ViewModelPattern}"))
-                throw new Exception($"The view model for the delete {entity.Name} was not found ");
+            if (!string.IsNullOrEmpty(options.ViewModelPattern))
+            {
+                if (!viewModels.Any(x => x.Name == $"{entity.Name}Create{options.ViewModelPattern}"))
+                   CrudBusterViewModelGenerator.GenerateDtoFromEntity(entity,$"{entity.Name}Create{options.ViewModelPattern}",options.ViewModelOutputPath,entity.Name,options.ViewModelPattern,"Create");
+                if (!viewModels.Any(x => x.Name == $"{entity.Name}Update{options.ViewModelPattern}"))
+                   CrudBusterViewModelGenerator.GenerateDtoFromEntity(entity,$"{entity.Name}Create{options.ViewModelPattern}",options.ViewModelOutputPath,entity.Name,options.ViewModelPattern,"Update");
+                if (!viewModels.Any(x => x.Name == $"{entity.Name}Delete{options.ViewModelPattern}"))
+                   CrudBusterViewModelGenerator.GenerateDtoFromEntity(entity,$"{entity.Name}Create{options.ViewModelPattern}",options.ViewModelOutputPath,entity.Name,options.ViewModelPattern,"Delete");
+                if (!viewModels.Any(x => x.Name == $"{entity.Name}Get{options.ViewModelPattern}"))
+                    CrudBusterViewModelGenerator.GenerateDtoFromEntity(entity,$"{entity.Name}Create{options.ViewModelPattern}",options.ViewModelOutputPath,entity.Name,options.ViewModelPattern,"Get");
+                if (!viewModels.Any(x => x.Name == $"{entity.Name}List{options.ViewModelPattern}"))
+                    CrudBusterViewModelGenerator.GenerateDtoFromEntity(entity,$"{entity.Name}Create{options.ViewModelPattern}",options.ViewModelOutputPath,entity.Name,options.ViewModelPattern,"List");
+            }
+         
             
             string routePrefix = entity.Name;
             var baseServiceType = repositoryInterface;

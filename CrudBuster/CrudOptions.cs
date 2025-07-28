@@ -45,11 +45,17 @@ namespace CrudBuster;
         /// Is authorization mandatory on a controller?
         /// </summary>
         public bool IsAuthenticateRequired { get; set; }
+        
         /// <summary>
         /// Your view model of entity name pattern
         /// Ex: Product*ViewModel*, Product*VM*, Product*DTO* etc...
         /// </summary>
         public string ViewModelPattern { get; set; }
+
+        /// <summary>
+        /// This variable defines where the view model classes will be created. The path you provide here will be used to generate the Create, Update, Delete, Get, and List view model classes.
+        /// </summary>
+        public string ViewModelOutputPath { get; set; }
         
         /// <summary>
         /// Admin, User, SuperAdmin etc...
