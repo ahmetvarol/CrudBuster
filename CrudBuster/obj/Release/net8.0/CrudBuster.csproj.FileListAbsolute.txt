@@ -12,3 +12,4 @@
 /Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/obj/Release/net8.0/CrudBuster.xml
 /Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/obj/Release/net8.0/CrudBuster.pdb
 /Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/obj/Release/net8.0/ref/CrudBuster.dll
+/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/obj/Release/net8.0/CrudBuster.csproj.AssemblyReference.cache
