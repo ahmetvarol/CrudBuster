@@ -4,4 +4,8 @@ obj/
 *.dll
 *.pdb
 *.nupkg
+.idea/
+*.iml
+*.suo
+*.user
 project.assets.json
