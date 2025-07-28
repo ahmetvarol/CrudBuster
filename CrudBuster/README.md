@@ -16,6 +16,12 @@ Add the NuGet package to your project:
 ## Feedback
 Thank you for testing our beta version! You can share your issues or suggestions via GitHub Issues.
 
+# Changelog
+## [1.0.7] - 2025-07-28
+### Added
+- The view model folder structure is created based on the dynamic entity name.
+- Performance improvements have been made.
+
 
 ## Usage
 ```csharp
