@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Automatic CRUD endpoint generator for ASP.NET Core minimal APIs")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.8.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.8-beta1+beeeada177e3176057bf633c89b0363fc3313130")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.8-beta1+a338f9045745745604c20c336c8ffb29722a10e5")]
 [assembly: System.Reflection.AssemblyProductAttribute("CrudBuster")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CrudBuster")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.8.0")]

@@ -1156,7 +1156,7 @@
     "/Users/varol/.nuget/packages/": {}
   },
   "project": {
-    "version": "1.0.7-beta1",
+    "version": "1.0.8-beta1",
     "restore": {
       "projectUniqueName": "/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/CrudBuster.csproj",
       "projectName": "CrudBuster",
