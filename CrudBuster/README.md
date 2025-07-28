@@ -16,13 +16,21 @@ Add the NuGet package to your project:
 ## Feedback
 Thank you for testing our beta version! You can share your issues or suggestions via GitHub Issues.
 
+
 # Changelog
-## [1.0.7] - 2025-07-28
+## [1.0.8] - 2025-07-28
 ### Added
+- Delegate-based architecture was employed for CRUD services, enabling dynamic method binding and enhancing execution efficiency.
+- Core infrastructure has been refactored to support modularity and performance.
+
+## [1.0.7] - 2025-07-28
 - The view model folder structure is created based on the dynamic entity name.
 - Performance improvements have been made.
 - If any of the view models (CreateViewModel, UpdateViewModel, DeleteViewModel, GetViewModel, GetListViewModel) are missing, the system will automatically generate the missing ones. If the entity has no view models at all, it will generate all of them.
 - Critical bug fixed
+
+
+
 
 ## Usage
 ```csharp
