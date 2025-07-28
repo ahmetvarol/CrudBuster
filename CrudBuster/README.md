@@ -71,10 +71,6 @@ app.CrudBuster(opt => opt
 
 ```
 
-```bash
-  dotnet add package CrudBuster --version 1.0.7-beta1 --prerelease
-```
-
 
 ## Donate
 Binance
