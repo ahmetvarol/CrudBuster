@@ -21,41 +21,11 @@ Thank you for testing our beta version! You can share your issues or suggestions
 ### Added
 - The view model folder structure is created based on the dynamic entity name.
 - Performance improvements have been made.
-
+- If any of the view models (CreateViewModel, UpdateViewModel, DeleteViewModel, GetViewModel, GetListViewModel) are missing, the system will automatically generate the missing ones. If the entity has no view models at all, it will generate all of them.
+- Critical bug fixed
 
 ## Usage
 ```csharp
-//ViewModels()
-public record ProductCreateVM(Guid Id, string Name);
-public record ProductUpdateVM(Guid Id, string Name);
-public record ProductDeleteVM(Guid Id, string Name);
-public record ProductGetVM(Guid Id, string Name);
-public record ProductListVM(Guid Id, string Name);
-
-
-public interface IRepository
-{
-    Task GetAsync();
-    Task GetListAsync();
-    Task CreateAsync();
-    Task UpdateAsync();
-    Task DeleteAsync();
-}
-
-public async Task<Result<List<TListViewModel>>> GetListAsync()
-{
-    var response = new Result<List<TListViewModel>>();
-    var data = await _repository.GetAllAsync(x=>x.Status == Status.Active);
-
-    if (data is not null)
-        response.Data = _mapper.Map<List<TListViewModel>>(data);
-    else
-        response.Message = "Something went wrong";
-
-    return response;
-}
-
-    
 app.CrudBuster(opt => opt
     //!!! It must be the same as the method name in the repository.
     .WithGetByIdService("GetAsync")
@@ -83,6 +53,9 @@ app.CrudBuster(opt => opt
     
     //In this field, you must assign the last part of the name you used in your view model classes. For example: ProductCreate*ViewModel*, ProductCreate*VM*, ProductCreate*DTO*, or whatever naming convention you follow.
     .WithViewModelPattern("VM")
+
+    //You must provide your own view model path."
+    .WithViewModelOutput(Directory.GetCurrentDirectory()+"/ViewModels")
     
     // !!!The database tables must have the same name as the base entity class they inherit from.
     .WithBaseEntityName("IBaseEntity")

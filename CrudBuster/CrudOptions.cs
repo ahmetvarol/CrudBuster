@@ -10,6 +10,7 @@ namespace CrudBuster;
         public CrudOptions WithRepositoryLayer(string name) { RepositoryLayerName = name; return this; }
         public CrudOptions WithRepositoryName(string name) { RepositoryName = name; return this; }
         public CrudOptions WithIsAuthenticateRequired(bool status) { IsAuthenticateRequired = status; return this; }
+        public CrudOptions WithViewModelOutput(string name) { ViewModelOutputPath = name; return this; }
         public CrudOptions WithViewModelPattern(string name) { ViewModelPattern = name; return this; }
         public CrudOptions WithAuthorizationPolicy(string name) { AuthorizationPolicy = name; return this; }
         public CrudOptions WithBaseEntityName(string name) { BaseEntityName = name; return this; }
@@ -56,7 +57,7 @@ namespace CrudBuster;
         /// This variable defines where the view model classes will be created. The path you provide here will be used to generate the Create, Update, Delete, Get, and List view model classes.
         /// </summary>
         public string ViewModelOutputPath { get; set; }
-        
+
         /// <summary>
         /// Admin, User, SuperAdmin etc...
         /// </summary>

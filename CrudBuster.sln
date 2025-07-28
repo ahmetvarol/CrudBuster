@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudBuster", "CrudBuster\CrudBuster.csproj", "{01BE8004-8109-4FFD-A9A1-3DE281E82B1A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{4CC8EC62-E845-4B6D-AC87-3B1871ECEC11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{01BE8004-8109-4FFD-A9A1-3DE281E82B1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01BE8004-8109-4FFD-A9A1-3DE281E82B1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01BE8004-8109-4FFD-A9A1-3DE281E82B1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CC8EC62-E845-4B6D-AC87-3B1871ECEC11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CC8EC62-E845-4B6D-AC87-3B1871ECEC11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CC8EC62-E845-4B6D-AC87-3B1871ECEC11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CC8EC62-E845-4B6D-AC87-3B1871ECEC11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

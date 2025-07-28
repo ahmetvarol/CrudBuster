@@ -5,12 +5,13 @@ namespace CrudBuster;
 
 public static class CrudBusterViewModelGenerator
 {
-    public static void GenerateDtoFromEntity(Type entityType, string newClassName, string viewModelOutputPath, string entityName, string viewModelPattern, string viewModelType)
+    public static bool GenerateDtoFromEntity(Type entityType, string newClassName, string viewModelOutputPath, string entityName, string viewModelPattern, string viewModelType, string domainAssamblyName)
     {
         var sb = new StringBuilder();
 
-        sb.AppendLine("public class " + newClassName);
-        sb.AppendLine("{");
+        //namespace WebApplication1.ViewModels.CategoryViewModels;
+        sb.AppendLine($"namespace {domainAssamblyName}.ViewModels.{entityName}ViewModels;");
+        
 
         var properties = entityType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
        
@@ -26,20 +27,27 @@ public static class CrudBusterViewModelGenerator
         
         foreach (var prop in properties)
         {
-            sb.AppendLine($"    public {prop.PropertyType.Name} {prop.Name} {{ get; set; }}");
+            sb.AppendLine($"    public {prop.PropertyType.Name.ToLower()} {prop.Name} {{ get; set; }}");
         }
 
         sb.AppendLine("}");
         
-        MakeViewModel(viewModelOutputPath, entityName, viewModelPattern, viewModelType,sb.ToString());
+        bool status = MakeViewModel(viewModelOutputPath, entityName, viewModelPattern, viewModelType,sb.ToString());
+        return status;
     }
 
-    public static void MakeViewModel(string viewModelOutputPath, string entityName, string viewModelPattern, string viewModelType, string outputCode)
+    public static bool MakeViewModel(string viewModelOutputPath, string entityName, string viewModelPattern, string viewModelType, string outputCode)
     {
         if (!Directory.Exists($"{viewModelOutputPath}/{entityName}ViewModels"))
             Directory.CreateDirectory($"{viewModelOutputPath}/{entityName}ViewModels");
-        
-        string file  = System.IO.Path.Combine($"{viewModelOutputPath}/{entityName}ViewModels", $"{entityName}{viewModelType}{viewModelPattern}.cs");
-        File.WriteAllText(file, outputCode);
+
+        if (!File.Exists($"{viewModelOutputPath}/{entityName}ViewModels/{entityName}{viewModelType}{viewModelPattern}/{entityName}{viewModelType}{viewModelPattern}.cs"))
+        {
+            string file  = System.IO.Path.Combine($"{viewModelOutputPath}/{entityName}ViewModels", $"{entityName}{viewModelType}{viewModelPattern}.cs");
+            File.WriteAllText(file, outputCode);
+            return true;
+        }
+
+        return false;
     }
 }

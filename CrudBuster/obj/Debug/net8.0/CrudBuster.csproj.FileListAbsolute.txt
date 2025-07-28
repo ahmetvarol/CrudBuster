@@ -12,3 +12,4 @@
 /Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/bin/Debug/net8.0/CrudBuster.xml
 /Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/obj/Debug/net8.0/CrudBuster.sourcelink.json
 /Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/obj/Debug/net8.0/CrudBuster.xml
+/Users/varol/Desktop/CrudBuster/CrudBuster/CrudBuster/obj/Debug/net8.0/CrudBuster.csproj.AssemblyReference.cache

@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace CrudBuster;
 using System.Reflection;
@@ -31,28 +33,59 @@ public static class CrudBusterExtensions
         if (repositoryInterface == null)
             throw new Exception($"{options.RepositoryName} not found.");
         
-
+        var sourceCodes = new List<string>();
         foreach (var entity in entities)
         {
-            var viewModels = viewModelsAssembly.GetExportedTypes().Where(t => t.IsClass && !t.IsAbstract && t.Name.StartsWith(entity.Name) && t.Name.EndsWith(options.ViewModelPattern)).ToList();
+            string routePrefix = entity.Name;
+            var baseServiceType = repositoryInterface;
             
+            var viewModels = viewModelsAssembly.GetExportedTypes().Where(t => t.IsClass && !t.IsAbstract && t.Name.StartsWith(entity.Name) && t.Name.EndsWith(options.ViewModelPattern)).ToList();
+
+           
             if (!string.IsNullOrEmpty(options.ViewModelPattern))
             {
                 if (!viewModels.Any(x => x.Name == $"{entity.Name}Create{options.ViewModelPattern}"))
-                   CrudBusterViewModelGenerator.GenerateDtoFromEntity(entity,$"{entity.Name}Create{options.ViewModelPattern}",options.ViewModelOutputPath,entity.Name,options.ViewModelPattern,"Create");
+                {
+                    bool status = CrudBusterViewModelGenerator.GenerateDtoFromEntity(entity,$"{entity.Name}Create{options.ViewModelPattern}",options.ViewModelOutputPath,entity.Name,options.ViewModelPattern,"Create",options.DomainLayerName);
+                    if(status)
+                        sourceCodes.Add($"{options.ViewModelOutputPath}/{entity.Name}Create{options.ViewModelPattern}.cs");
+                }
+
                 if (!viewModels.Any(x => x.Name == $"{entity.Name}Update{options.ViewModelPattern}"))
-                   CrudBusterViewModelGenerator.GenerateDtoFromEntity(entity,$"{entity.Name}Create{options.ViewModelPattern}",options.ViewModelOutputPath,entity.Name,options.ViewModelPattern,"Update");
+                {
+                    bool status =  CrudBusterViewModelGenerator.GenerateDtoFromEntity(entity,$"{entity.Name}Update{options.ViewModelPattern}",options.ViewModelOutputPath,entity.Name,options.ViewModelPattern,"Update",options.DomainLayerName);
+                    if (status)
+                        sourceCodes.Add($"{options.ViewModelOutputPath}/{entity.Name}Update{options.ViewModelPattern}.cs");
+                }
+
                 if (!viewModels.Any(x => x.Name == $"{entity.Name}Delete{options.ViewModelPattern}"))
-                   CrudBusterViewModelGenerator.GenerateDtoFromEntity(entity,$"{entity.Name}Create{options.ViewModelPattern}",options.ViewModelOutputPath,entity.Name,options.ViewModelPattern,"Delete");
+                {
+                    bool status = CrudBusterViewModelGenerator.GenerateDtoFromEntity(entity,$"{entity.Name}Delete{options.ViewModelPattern}",options.ViewModelOutputPath,entity.Name,options.ViewModelPattern,"Delete",options.DomainLayerName);
+                    if (status)
+                        sourceCodes.Add($"{options.ViewModelOutputPath}/{entity.Name}Delete{options.ViewModelPattern}.cs");
+                }
+
                 if (!viewModels.Any(x => x.Name == $"{entity.Name}Get{options.ViewModelPattern}"))
-                    CrudBusterViewModelGenerator.GenerateDtoFromEntity(entity,$"{entity.Name}Create{options.ViewModelPattern}",options.ViewModelOutputPath,entity.Name,options.ViewModelPattern,"Get");
+                {
+                    bool status = CrudBusterViewModelGenerator.GenerateDtoFromEntity(entity,$"{entity.Name}Get{options.ViewModelPattern}",options.ViewModelOutputPath,entity.Name,options.ViewModelPattern,"Get",options.DomainLayerName);
+                    if (status)
+                        sourceCodes.Add($"{options.ViewModelOutputPath}/{entity.Name}Get{options.ViewModelPattern}.cs");
+                }
+
                 if (!viewModels.Any(x => x.Name == $"{entity.Name}List{options.ViewModelPattern}"))
-                    CrudBusterViewModelGenerator.GenerateDtoFromEntity(entity,$"{entity.Name}Create{options.ViewModelPattern}",options.ViewModelOutputPath,entity.Name,options.ViewModelPattern,"List");
+                {
+                    bool status = CrudBusterViewModelGenerator.GenerateDtoFromEntity(entity,$"{entity.Name}List{options.ViewModelPattern}",options.ViewModelOutputPath,entity.Name,options.ViewModelPattern,"List",options.DomainLayerName);
+                    if (status)
+                        sourceCodes.Add($"{options.ViewModelOutputPath}/{entity.Name}List{options.ViewModelPattern}.cs");
+                }
+
+                if (sourceCodes.Any())
+                {
+                    var assembly = MemoryCompile.CompileToAssembly(options.ViewModelOutputPath);
+                    viewModels = assembly.GetExportedTypes().Where(t => t.IsClass && !t.IsAbstract && t.Name.StartsWith(entity.Name) && t.Name.EndsWith(options.ViewModelPattern)).ToList();
+                }
             }
-         
-            
-            string routePrefix = entity.Name;
-            var baseServiceType = repositoryInterface;
+
             
             var createViewModel = viewModels.First(x=>x.Name.EndsWith("Create"+options.ViewModelPattern));
             var updateViewModel = viewModels.First(x=>x.Name.EndsWith("Update"+options.ViewModelPattern));
@@ -74,7 +107,7 @@ public static class CrudBusterExtensions
             var updateRoute = endpoints.MapPut(routePrefix + "/UpdateAsync", async (HttpContext ctx) =>
                 {
                     var service = ctx.RequestServices.GetRequiredService(baseServiceType);
-                    var method = baseServiceType.GetMethod(options.CreateService);
+                    var method = baseServiceType.GetMethod(options.UpdateService);
                     var dto = await ctx.Request.ReadFromJsonAsync(updateViewModel);
                     var task = (Task)method.Invoke(service, new object[] { dto });
                     await task.ConfigureAwait(false);
@@ -126,4 +159,6 @@ public static class CrudBusterExtensions
         
         return endpoints;
     }
+    
+   
 }
