@@ -1,5 +1,5 @@
 # CrudBuster
-Automatic CRUD Endpoint Generator for ASP.NET Core Minimal APIs (Beta)
+An automatic CRUD endpoint generator for ASP.NET Core Minimal APIs that scans your project's entities and automatically generates corresponding CRUD (Create, Read, Update, Delete) service endpoints based on those entities, streamlining API development and reducing boilerplate code."
 
 **CrudBuster**, allows you to quickly and flexibly generate CRUD (Create, Read, Update, Delete) endpoints in your ASP.NET Core applications. You can define your endpoints without relying on any interface by integrating your own service classes through delegates.
 
@@ -26,8 +26,7 @@ public record ProductDeleteVM(Guid Id, string Name);
 public record ProductGetVM(Guid Id, string Name);
 public record ProductListVM(Guid Id, string Name);
 
-...
-    
+
 public interface IRepository
 {
     Task GetAsync();
@@ -49,16 +48,7 @@ public async Task<Result<List<TListViewModel>>> GetListAsync()
 
     return response;
 }
-... 
-    //Base response model
-    public class Result<T>
-    {
-        public bool Status { get; set; }
-        public string Message { get; set; }
-        public T Data { get; set; }
-    }
-    
-...
+
     
 app.CrudBuster(opt => opt
     //!!! It must be the same as the method name in the repository.
@@ -90,9 +80,6 @@ app.CrudBuster(opt => opt
     
     // !!!The database tables must have the same name as the base entity class they inherit from.
     .WithBaseEntityName("IBaseEntity")
-    
-    //Where will the obtained data be assigned? You should provide the name of the base response field in this area.
-    .WithApiResulClassName("ApiResult") 
     
     //If required authenticate
     .WithIsAuthenticateRequired(false)
