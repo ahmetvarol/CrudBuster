@@ -40,7 +40,6 @@ public static class CrudBusterExtensions
             var baseServiceType = repositoryInterface;
             
             var viewModels = viewModelsAssembly.GetExportedTypes().Where(t => t.IsClass && !t.IsAbstract && t.Name.StartsWith(entity.Name) && t.Name.EndsWith(options.ViewModelPattern)).ToList();
-
            
             if (!string.IsNullOrEmpty(options.ViewModelPattern))
             {
@@ -92,14 +91,15 @@ public static class CrudBusterExtensions
             var deleteViewModel = viewModels.First(x=>x.Name.EndsWith("Delete"+options.ViewModelPattern));
                 
                 
-            var createRoute = endpoints.MapPost(routePrefix + "/AddAsync", async (HttpContext ctx) =>
+            CrudDelegateCache.SetMethods(options);
+            
+            var createRoute = endpoints.MapPost(routePrefix + "/CreateAsync", async (HttpContext ctx) =>
                 {
                     var service = ctx.RequestServices.GetRequiredService(baseServiceType);
-                    var method = baseServiceType.GetMethod(options.CreateService);
                     var dto = await ctx.Request.ReadFromJsonAsync(createViewModel);
-                    var task = (Task)method.Invoke(service, new object[] { dto });
-                    await task.ConfigureAwait(false);
-                    return task.GetType().GetProperty("Result")?.GetValue(task);
+                    var serviceDelegate = CrudDelegateCache.CreateDelegate(baseServiceType);
+                    await serviceDelegate(service, dto);
+                    return Results.Ok();
                 })
                 .Accepts(createViewModel, "application/json")
                 .WithTags(routePrefix);
@@ -107,11 +107,10 @@ public static class CrudBusterExtensions
             var updateRoute = endpoints.MapPut(routePrefix + "/UpdateAsync", async (HttpContext ctx) =>
                 {
                     var service = ctx.RequestServices.GetRequiredService(baseServiceType);
-                    var method = baseServiceType.GetMethod(options.UpdateService);
                     var dto = await ctx.Request.ReadFromJsonAsync(updateViewModel);
-                    var task = (Task)method.Invoke(service, new object[] { dto });
-                    await task.ConfigureAwait(false);
-                    return task.GetType().GetProperty("Result")?.GetValue(task);
+                    var serviceDelegate = CrudDelegateCache.UpdateDelegate(baseServiceType);
+                    await serviceDelegate(service, dto);
+                    return Results.Ok();
                 })
                 .Accepts(updateViewModel, "application/json")
                 .WithTags(routePrefix);
@@ -119,11 +118,11 @@ public static class CrudBusterExtensions
             var deleteRoute = endpoints.MapDelete(routePrefix + "/DeleteAsync", async (HttpContext ctx) =>
                 {
                     var service = ctx.RequestServices.GetRequiredService(baseServiceType);
-                    var method = baseServiceType.GetMethod(options.DeleteService);
                     var dto = await ctx.Request.ReadFromJsonAsync(deleteViewModel);
-                    var task = (Task)method.Invoke(service, new object[] { dto });
-                    await task.ConfigureAwait(false);
+                    var serviceDelegate = CrudDelegateCache.DeleteDelegate(baseServiceType);
+                    await serviceDelegate(service, dto);
                     return Results.Ok();
+                 
                 })
                 .Accepts(deleteViewModel, "application/json")
                 .WithTags(routePrefix);
@@ -131,20 +130,18 @@ public static class CrudBusterExtensions
             var getAllRoute = endpoints.MapGet(routePrefix + "/GetListAsync", async (HttpContext ctx) =>
                 {
                     var service = ctx.RequestServices.GetRequiredService(baseServiceType);
-                    var method = baseServiceType.GetMethod(options.GetListService);
-                    var task = (Task)method.Invoke(service, null);
-                    await task.ConfigureAwait(false);
-                    return task.GetType().GetProperty("Result")?.GetValue(task);
+                    var serviceDelegate = CrudDelegateCache.GetListDelegate(baseServiceType);
+                    var result = await serviceDelegate(service);
+                    return Results.Ok(result);
                 })
                 .WithTags(routePrefix);
 
             var getRoute = endpoints.MapGet(routePrefix + "/GetAsync/{{Id}}", async (Guid Id,HttpContext ctx) =>
                 {
                     var service = ctx.RequestServices.GetRequiredService(baseServiceType);
-                    var method = baseServiceType.GetMethod(options.GetByIdService);
-                    var task = (Task)method.Invoke(service, new object[] { Id });
-                    await task.ConfigureAwait(false);
-                    return task.GetType().GetProperty("Result")?.GetValue(task);
+                    var serviceDelegate = CrudDelegateCache.GetByIdDelegate(baseServiceType);
+                    var result = await serviceDelegate(service,Id);
+                    return Results.Ok(result);
                 })
                 .WithTags(routePrefix);
             
