@@ -18,6 +18,11 @@ Thank you for testing our beta version! You can share your issues or suggestions
 
 
 # Changelog
+## [1.0.9] - 2025-07-29
+### Added
+- The error in the PropertyType.Name value has been resolved.
+- Critical bug fixed
+
 ## [1.0.8] - 2025-07-28
 ### Added
 - Delegate-based architecture was employed for CRUD services, enabling dynamic method binding and enhancing execution efficiency.

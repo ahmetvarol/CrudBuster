@@ -27,7 +27,11 @@ public static class CrudBusterViewModelGenerator
         
         foreach (var prop in properties)
         {
-            sb.AppendLine($"    public {prop.PropertyType.Name.ToLower()} {prop.Name} {{ get; set; }}");
+            string propName = "";
+            if(!prop.PropertyType.IsEnum)
+                propName = prop.PropertyType.Name.ToLower();
+            
+            sb.AppendLine($"    public {propName} {prop.Name} {{ get; set; }}");
         }
 
         sb.AppendLine("}");
