@@ -12,10 +12,15 @@ public static class MemoryCompile
         
         var syntaxTrees = sourceCodes.Select(code =>
             CSharpSyntaxTree.ParseText(code)).ToList();
-    
-        var compilation = CSharpCompilation.Create("ViewModelLayer")
+       
+        var references = AppDomain.CurrentDomain.GetAssemblies()
+            .Where(a => !a.IsDynamic && !string.IsNullOrEmpty(a.Location))
+            .Select(a => MetadataReference.CreateFromFile(a.Location))
+            .ToList();
+        
+        var compilation = CSharpCompilation.Create(Guid.NewGuid().ToString())
             .WithOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary))
-            .AddReferences(MetadataReference.CreateFromFile(typeof(object).Assembly.Location))
+            .AddReferences(references)
             .AddSyntaxTrees(syntaxTrees);
     
         using var ms = new MemoryStream();

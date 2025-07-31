@@ -28,8 +28,13 @@ public static class CrudBusterExtensions
             throw new Exception($"Entities not found in assembly {options.DomainLayerName}");
         
         
-        var repositoryInterface = repositoryAssembly.GetType(options.RepositoryName) ?? repositoryAssembly.GetExportedTypes().FirstOrDefault(t => t.Name == options.RepositoryName);
-      
+        var repositoryInterface = repositoryAssembly.GetType(options.RepositoryName)
+                                  ?? repositoryAssembly.GetExportedTypes()
+                                      .FirstOrDefault(t =>
+                                          t.Name == options.RepositoryName || 
+                                          (t.IsGenericTypeDefinition && t.Name.StartsWith(options.RepositoryName + "`")));
+
+        
         if (repositoryInterface == null)
             throw new Exception($"{options.RepositoryName} not found.");
         
@@ -83,6 +88,7 @@ public static class CrudBusterExtensions
                     var assembly = MemoryCompile.CompileToAssembly(options.ViewModelOutputPath);
                     viewModels = assembly.GetExportedTypes().Where(t => t.IsClass && !t.IsAbstract && t.Name.StartsWith(entity.Name) && t.Name.EndsWith(options.ViewModelPattern)).ToList();
                 }
+                
             }
 
             
