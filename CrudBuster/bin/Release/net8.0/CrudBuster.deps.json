@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "CrudBuster/1.0.10-beta1": {
+      "CrudBuster/1.0.0": {
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp": "4.14.0",
           "Microsoft.Extensions.DependencyInjection": "8.0.1"
@@ -166,7 +166,7 @@
     }
   },
   "libraries": {
-    "CrudBuster/1.0.10-beta1": {
+    "CrudBuster/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

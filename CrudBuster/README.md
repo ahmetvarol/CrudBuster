@@ -18,6 +18,31 @@ Thank you for testing our beta version! You can share your issues or suggestions
 
 
 # Changelog
+
+## [1.0.0] - 2025-08-07
+🎉 First stable release
+
+This version marks the first stable release of CrudBuster, following several beta versions and improvements.
+It includes all core features to simplify CRUD endpoint generation in ASP.NET Core Minimal APIs:
+
+Highlights:
+✅ Automatic CRUD endpoint generation via delegates
+
+✅ Minimal API support (.NET 6+)
+
+✅ Flexible service integration
+
+✅ ViewModel auto-generation
+
+✅ Authorization support
+
+✅ Layered architecture configuration
+
+✅ Modular and extensible core
+
+We believe this release provides a solid foundation for production use.
+We welcome your feedback for future improvements!
+
 ## [1.0.9] - 2025-07-29
 ### Added
 - The error in the PropertyType.Name value has been resolved.

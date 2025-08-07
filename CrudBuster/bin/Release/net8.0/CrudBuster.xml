@@ -77,5 +77,11 @@
             It is used to get the classes that inherit from this class.
             </summary>
         </member>
+        <member name="P:CrudBuster.CrudOptions.ProccessType">
+            <summary>
+            MinimalAPI: Genearate minimal API's
+            Controller: Generate static controller files
+            </summary>
+        </member>
     </members>
 </doc>

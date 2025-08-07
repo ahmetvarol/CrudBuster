@@ -5,6 +5,7 @@ namespace CrudBuster;
     /// </summary>
     public class CrudOptions
     {
+        public CrudOptions WithProccessType(ProccessType proccessType) { ProccessType = proccessType; return this; }
         public CrudOptions WithDomainLayer(string name) { DomainLayerName = name; return this; }
         public CrudOptions WithViewModelLayer(string name) { ViewModelsLayerName = name; return this; }
         public CrudOptions WithRepositoryLayer(string name) { RepositoryLayerName = name; return this; }
@@ -92,6 +93,12 @@ namespace CrudBuster;
         /// It is used to get the classes that inherit from this class.
         /// </summary>
         public string DeleteService { get; set; }
+
+        /// <summary>
+        /// MinimalAPI: Genearate minimal API's
+        /// Controller: Generate static controller files
+        /// </summary>
+        public ProccessType ProccessType  { get; set; }
     }
     
     

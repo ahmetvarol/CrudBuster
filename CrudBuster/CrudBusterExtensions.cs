@@ -91,72 +91,79 @@ public static class CrudBusterExtensions
                 
             }
 
-            
-            var createViewModel = viewModels.First(x=>x.Name.EndsWith("Create"+options.ViewModelPattern));
-            var updateViewModel = viewModels.First(x=>x.Name.EndsWith("Update"+options.ViewModelPattern));
-            var deleteViewModel = viewModels.First(x=>x.Name.EndsWith("Delete"+options.ViewModelPattern));
-                
-                
-            CrudDelegateCache.SetMethods(options);
-            
-            var createRoute = endpoints.MapPost(routePrefix + "/CreateAsync", async (HttpContext ctx) =>
-                {
-                    var service = ctx.RequestServices.GetRequiredService(baseServiceType);
-                    var dto = await ctx.Request.ReadFromJsonAsync(createViewModel);
-                    var serviceDelegate = CrudDelegateCache.CreateDelegate(baseServiceType);
-                    await serviceDelegate(service, dto);
-                    return Results.Ok();
-                })
-                .Accepts(createViewModel, "application/json")
-                .WithTags(routePrefix);
-            
-            var updateRoute = endpoints.MapPut(routePrefix + "/UpdateAsync", async (HttpContext ctx) =>
-                {
-                    var service = ctx.RequestServices.GetRequiredService(baseServiceType);
-                    var dto = await ctx.Request.ReadFromJsonAsync(updateViewModel);
-                    var serviceDelegate = CrudDelegateCache.UpdateDelegate(baseServiceType);
-                    await serviceDelegate(service, dto);
-                    return Results.Ok();
-                })
-                .Accepts(updateViewModel, "application/json")
-                .WithTags(routePrefix);
-            
-            var deleteRoute = endpoints.MapDelete(routePrefix + "/DeleteAsync", async (HttpContext ctx) =>
-                {
-                    var service = ctx.RequestServices.GetRequiredService(baseServiceType);
-                    var dto = await ctx.Request.ReadFromJsonAsync(deleteViewModel);
-                    var serviceDelegate = CrudDelegateCache.DeleteDelegate(baseServiceType);
-                    await serviceDelegate(service, dto);
-                    return Results.Ok();
-                 
-                })
-                .Accepts(deleteViewModel, "application/json")
-                .WithTags(routePrefix);
-            
-            var getAllRoute = endpoints.MapGet(routePrefix + "/GetListAsync", async (HttpContext ctx) =>
-                {
-                    var service = ctx.RequestServices.GetRequiredService(baseServiceType);
-                    var serviceDelegate = CrudDelegateCache.GetListDelegate(baseServiceType);
-                    var result = await serviceDelegate(service);
-                    return Results.Ok(result);
-                })
-                .WithTags(routePrefix);
+            if (options.ProccessType == ProccessType.MinimalAPI)
+            {
+                 var createViewModel = viewModels.First(x=>x.Name.EndsWith("Create"+options.ViewModelPattern));
+                    var updateViewModel = viewModels.First(x=>x.Name.EndsWith("Update"+options.ViewModelPattern));
+                    var deleteViewModel = viewModels.First(x=>x.Name.EndsWith("Delete"+options.ViewModelPattern));
+                        
+                        
+                    CrudDelegateCache.SetMethods(options);
+                    
+                    var createRoute = endpoints.MapPost(routePrefix + "/CreateAsync", async (HttpContext ctx) =>
+                        {
+                            var service = ctx.RequestServices.GetRequiredService(baseServiceType);
+                            var dto = await ctx.Request.ReadFromJsonAsync(createViewModel);
+                            var serviceDelegate = CrudDelegateCache.CreateDelegate(baseServiceType);
+                            await serviceDelegate(service, dto);
+                            return Results.Ok();
+                        })
+                        .Accepts(createViewModel, "application/json")
+                        .WithTags(routePrefix);
+                    
+                    var updateRoute = endpoints.MapPut(routePrefix + "/UpdateAsync", async (HttpContext ctx) =>
+                        {
+                            var service = ctx.RequestServices.GetRequiredService(baseServiceType);
+                            var dto = await ctx.Request.ReadFromJsonAsync(updateViewModel);
+                            var serviceDelegate = CrudDelegateCache.UpdateDelegate(baseServiceType);
+                            await serviceDelegate(service, dto);
+                            return Results.Ok();
+                        })
+                        .Accepts(updateViewModel, "application/json")
+                        .WithTags(routePrefix);
+                    
+                    var deleteRoute = endpoints.MapDelete(routePrefix + "/DeleteAsync", async (HttpContext ctx) =>
+                        {
+                            var service = ctx.RequestServices.GetRequiredService(baseServiceType);
+                            var dto = await ctx.Request.ReadFromJsonAsync(deleteViewModel);
+                            var serviceDelegate = CrudDelegateCache.DeleteDelegate(baseServiceType);
+                            await serviceDelegate(service, dto);
+                            return Results.Ok();
+                         
+                        })
+                        .Accepts(deleteViewModel, "application/json")
+                        .WithTags(routePrefix);
+                    
+                    var getAllRoute = endpoints.MapGet(routePrefix + "/GetListAsync", async (HttpContext ctx) =>
+                        {
+                            var service = ctx.RequestServices.GetRequiredService(baseServiceType);
+                            var serviceDelegate = CrudDelegateCache.GetListDelegate(baseServiceType);
+                            var result = await serviceDelegate(service);
+                            return Results.Ok(result);
+                        })
+                        .WithTags(routePrefix);
 
-            var getRoute = endpoints.MapGet(routePrefix + "/GetAsync/{{Id}}", async (Guid Id,HttpContext ctx) =>
-                {
-                    var service = ctx.RequestServices.GetRequiredService(baseServiceType);
-                    var serviceDelegate = CrudDelegateCache.GetByIdDelegate(baseServiceType);
-                    var result = await serviceDelegate(service,Id);
-                    return Results.Ok(result);
-                })
-                .WithTags(routePrefix);
-            
-            
-            getAllRoute.ApplyAuthorization(options);
-            getRoute.ApplyAuthorization(options);
-            createRoute.ApplyAuthorization(options);
-            updateRoute.ApplyAuthorization(options);
-            deleteRoute.ApplyAuthorization(options);
+                    var getRoute = endpoints.MapGet(routePrefix + "/GetAsync/{{Id}}", async (Guid Id,HttpContext ctx) =>
+                        {
+                            var service = ctx.RequestServices.GetRequiredService(baseServiceType);
+                            var serviceDelegate = CrudDelegateCache.GetByIdDelegate(baseServiceType);
+                            var result = await serviceDelegate(service,Id);
+                            return Results.Ok(result);
+                        })
+                        .WithTags(routePrefix);
+                    
+                    
+                    getAllRoute.ApplyAuthorization(options);
+                    getRoute.ApplyAuthorization(options);
+                    createRoute.ApplyAuthorization(options);
+                    updateRoute.ApplyAuthorization(options);
+                    deleteRoute.ApplyAuthorization(options);
+            }
+            else if (options.ProccessType == ProccessType.Controller)
+            {
+                
+            }
+           
         }
         
         
